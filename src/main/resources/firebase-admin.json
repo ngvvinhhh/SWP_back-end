@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "birthdaykids-674a4",
+  "private_key_id": "f424a133f14818c0767878df6cc52c8c9bec7436",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQChXCniysBjkWY+\nKJjnApQtLlrqtCXIp0YgammG+YXMf+Vq9rJfYGz9vjAJduAXTQxzCwg9S9l2er+c\nc97uxfR1iFDgaPD8/PQn3JM9uHIWF+R5nOizqGtD177VJDLPy+dBAE/Jyp0uEMT8\no0I8Rikq/yUsF0KaOoY9QZ7oGHC51yBLUnLPCw5TwNYrpszG+VpwF/AvA1KIKah9\nq4oUgexZuy6yWmJV1yMnooE3+5nMcMDmjJtBJwP1VWAt5IoVZAh94V6jNnQKhoXY\n4qn75/A7ot/hAOBDs8zoNx6F9DKwAAwaKn8hnEIB5LBW42ZibtEt7LeaOo0WKfSi\nSaWEycNNAgMBAAECggEABPYPd6CiP611xk17PgcPRUBanULCsqOp/U8oRXUgjwQT\nqrFBFLujPj39vhzAkRbWXiclrrTJT+JAR/AsF41QkdiKHAw99JlWbG9Uu54TK+i6\nJp8TbIquGZzliiodwdPUHWSED4FCSetMEzR10eKaW28S1oM0kgdgnzuIRjySIrSV\nC+7kql9am/cmk4VKHUhw0rm9yDt95Zo4gM+cDyMePzISjNzH7qAkg869p0NRx7YH\nGhqowKnEn06NIx95bJMiC/emPBMxChrPnQQraElEZLr64watoRrSADH1gqJdrhSE\nAjfqMdIy82P2VBoXU2jk6zCv+AnRoPkUcdXL1M2CxQKBgQDZUAZzZ2GJohARnoYy\nFQ0f3UNx+e0bMzJCfrQTegYEsXs5tZMspm/QVBhj6oTRlQoefpiLI96ouGeO5ZlB\nZGmt9R4oSFxtBvICwVW4fZ+r2HzpS5o2nhGzptFDWld97XE4nJygh/c2r/WIi2Tp\nCNt1Fi2MunrO7yNrc38dBRNyJwKBgQC+FhyIdH3RAkTV/50oJx3kCIfyNGqvojI1\nNLF6EN6SXmUWSDO77B9loriOHrbO8i9D/kfOIs57XxUlTUxbnXgNJlbxRrlcmyqX\nL/igIA3+QfEIfxiSjU9gp2v95+lnE9fd8S1C37mHHbqX+ClQT8PZmshLbtS/cwln\npzOEOu+rawKBgFYQRm2//LYIc/q2YIlHIwqCk6p5A7lo/jetfF3WTrnfHGFPkvj0\n9YV5OKuhfnaOYxKOqpU4YH9LgN/r+FUYkm3tjMMBXXFkdcY3kV5eijUBqP6wDWQi\nF/qhT3EwP0RFHDkCdVlyX6rN5xzrr8xG0Ls/TEzWsbpwpQNyG15/2yKzAoGAPaDt\nn1Alep5BsyAs09fa2RPq/5v++vKbVKTA5dKSVuJD4/WE0Gi9xTX8oBdVLcNXj7Ph\nk/O0/krVkEJ/fzSOt7S2e4NylZO5O0tSUJgT8VtvylFqphkqoyuk161Y/xJv6oVH\nJ2dhv2zkEmFjA6bY2LRWPB6y219wrSqIiVaSXgECgYB80UCnJgdDejdeUDcUrnho\nf5kkocxFmdJdWMPsBoqDhQdAKrd/OhBvUPtCEa/5JrZ7+XLSSPZfwn/DsO9tzjyZ\n9QRxR47jYL9lUvkkVW5RHpxBW9EJYYrenaXEW+ejdnYTSNzBjmM1Oem6RqTHZ3hF\n30SPCqHNEoVu4x7deFGPjg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-q92ya@birthdaykids-674a4.iam.gserviceaccount.com",
+  "client_id": "117583414937000656318",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-q92ya%40birthdaykids-674a4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
