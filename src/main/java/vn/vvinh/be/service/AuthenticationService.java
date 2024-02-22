@@ -7,8 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import vn.vvinh.be.dto.RegisterRequestDTO;
+import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.repository.AccountRepository;
+import vn.vvinh.be.security.TokenHandler;
 
 @Service
 public class AuthenticationService {
@@ -21,6 +23,9 @@ public class AuthenticationService {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    TokenHandler tokenHandler;
 
     public Account register(RegisterRequestDTO requestDTO){
         Account account = new Account();
@@ -35,7 +40,7 @@ public class AuthenticationService {
         return newAccount;
     }
 
-    public Account login(Account account){
+    public LoginResponse login(Account account){
         Authentication authentication;
         try{
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -44,7 +49,13 @@ public class AuthenticationService {
             ));
             Account loginAccount = (Account) authentication.getPrincipal();
             // dang nhap thanh cong
-            return loginAccount;
+
+            LoginResponse loginResponse = new LoginResponse();
+            loginResponse.setId(loginAccount.getId());
+            loginResponse.setFullname(loginAccount.getFullName());
+            loginResponse.setUsername(loginAccount.getUsername());
+            loginResponse.setToken(tokenHandler.generateToken(loginAccount));
+            return loginResponse;
         } catch (Exception e){
             // sai tk mk
             return null;

@@ -87,6 +87,10 @@ public class Account implements UserDetails {
         this.password = password;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

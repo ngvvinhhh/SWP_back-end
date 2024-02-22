@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import vn.vvinh.be.dto.RegisterRequestDTO;
+import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.service.AuthenticationService;
 
@@ -24,7 +25,14 @@ public class AuthenticationController {
 
     @PostMapping("/authentication/login")
     public ResponseEntity login(@RequestBody Account account){
-        Account newAccount = authenticationService.login(account);
+        LoginResponse newAccount = authenticationService.login(account);
         return ResponseEntity.ok(newAccount);
     }
+
+//    @PostMapping("/authentication/logingg")
+//    public ResponseEntity logingg(@RequestBody ){
+//
+//    }
+
+
 }
