@@ -8,8 +8,10 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import vn.vvinh.be.enums.Gender;
+import vn.vvinh.be.enums.Role;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -29,6 +31,16 @@ public class Account implements UserDetails {
     String email;
     @Enumerated(EnumType.STRING)
     Gender gender;
+    @Enumerated(EnumType.STRING)
+    Role role;
+
+    @OneToMany(mappedBy = "account")
+    List<Package> packages;
+
+    @ManyToOne()
+    @JoinColumn(name = "accounts")
+    Schedule schedule;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
