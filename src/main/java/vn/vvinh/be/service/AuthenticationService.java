@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import vn.vvinh.be.dto.LoginRequestDTO;
 import vn.vvinh.be.dto.RegisterRequestDTO;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
@@ -40,12 +41,12 @@ public class AuthenticationService {
         return newAccount;
     }
 
-    public LoginResponse login(Account account){
+    public LoginResponse login(LoginRequestDTO loginRequestDTO){
         Authentication authentication;
         try{
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-               account.getUsername(),
-               account.getPassword()
+               loginRequestDTO.getUserName(),
+               loginRequestDTO.getPassword()
             ));
             Account loginAccount = (Account) authentication.getPrincipal();
             // dang nhap thanh cong

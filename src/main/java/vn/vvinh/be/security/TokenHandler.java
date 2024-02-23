@@ -19,7 +19,7 @@ public class TokenHandler {
         Date expirationDate = new Date(now.getTime() + EXPIRATION);
 
         String token = Jwts.builder()
-                .setSubject(userSecurity.getId()+"")
+                .setSubject(userSecurity.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
