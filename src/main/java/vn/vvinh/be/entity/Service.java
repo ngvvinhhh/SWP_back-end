@@ -27,4 +27,7 @@ public class Service {
 //    ServiceOfPackage serviceOfPackage;
     @ManyToMany(mappedBy = "services")
     List<Package> packages;
+
+
+
 }

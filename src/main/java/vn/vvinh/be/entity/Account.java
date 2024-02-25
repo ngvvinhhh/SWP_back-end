@@ -37,11 +37,17 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "account")
     List<Package> packages;
 
-    @ManyToOne()
-    @JoinColumn(name = "accounts")
-    Schedule schedule;
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")  // Corrected column name
+    private Schedule schedule;
 
 
+    @OneToOne
+    @JoinColumn(name = "wallet_id")
+    Wallet wallet;
+
+    @OneToMany(mappedBy = "account")
+    List<Rating> ratings;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

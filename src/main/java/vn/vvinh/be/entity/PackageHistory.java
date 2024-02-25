@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -19,6 +21,17 @@ public class PackageHistory {
     String category;
     int capacity;
     String description;
-    String serviceID;
-    String picture;
+
+    @ManyToMany
+    @JoinTable(
+            name = "service_history_of_package_history",
+            joinColumns = @JoinColumn(name = "service_history_id"),
+            inverseJoinColumns = @JoinColumn(name = "package_history_id")
+    )
+    List<ServiceHistory> serviceHistories;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    Order order;
+
 }

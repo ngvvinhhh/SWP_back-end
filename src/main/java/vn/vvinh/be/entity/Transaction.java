@@ -6,27 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ServiceHistory")
-public class ServiceHistory {
+@Table(name = "Transaction_table")
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String serviceName;
-    double price;
-    int quantity;
-    String picture;
+    String orderID;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    Order order;
+    @JoinColumn(name = "wallet_id")
+    Wallet wallet;
 
-    @ManyToMany(mappedBy = "serviceHistories")
-    List<PackageHistory> packageHistories;
+
 }

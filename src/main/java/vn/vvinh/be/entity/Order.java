@@ -23,10 +23,12 @@ public class Order {
     String packageHistoryID;
     String scheduleID;
     String hostID;
-    String packageID;
     double total;
     String time;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "order")
     List<ServiceHistory> serviceHistories;
+
+    @OneToMany(mappedBy = "order")
+    List<PackageHistory> packageHistories;
 }

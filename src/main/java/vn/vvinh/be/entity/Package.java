@@ -23,13 +23,11 @@ public class Package {
     int capacity;
     String description;
     String serviceID;
-    String picture;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "account_id")
     Account account;
-//    @OneToMany(mappedBy = "aPackage")
-//    ServiceOfPackage serviceOfPackage;
+
     @ManyToMany()
     @JoinTable(
             name = "service_of_package",

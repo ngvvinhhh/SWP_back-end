@@ -13,20 +13,14 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ServiceHistory")
-public class ServiceHistory {
+@Table(name = "Wallet")
+public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String serviceName;
-    double price;
-    int quantity;
-    String picture;
+    double total;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    Order order;
+    @OneToMany(mappedBy = "wallet")
+    List<Transaction> transactions;
 
-    @ManyToMany(mappedBy = "serviceHistories")
-    List<PackageHistory> packageHistories;
 }
