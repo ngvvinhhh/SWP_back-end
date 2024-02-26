@@ -5,7 +5,6 @@ import vn.vvinh.be.entity.Package;
 
 import java.util.Optional;
 
-public interface ProductRepository extends JpaRepository<Package, Long> {
-//    Optional<Package> findByPartyID(String partyID);
+public interface PackageRepository extends JpaRepository<Package, Long> {
+    //Optional<Package> findBy(String Id);
 }
-

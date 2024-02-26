@@ -8,10 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import vn.vvinh.be.dto.LoginRequestDTO;
 import vn.vvinh.be.dto.RegisterRequestDTO;
+import vn.vvinh.be.dto.UpdateRequestDTO;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
+import vn.vvinh.be.exception.AccountNotFound;
 import vn.vvinh.be.repository.AccountRepository;
 import vn.vvinh.be.security.TokenHandler;
+import vn.vvinh.be.utils.AccountUtils;
 
 @Service
 public class AuthenticationService {
@@ -28,6 +31,9 @@ public class AuthenticationService {
     @Autowired
     TokenHandler tokenHandler;
 
+    @Autowired
+    AccountUtils accountUtils;
+
     public Account register(RegisterRequestDTO requestDTO){
         Account account = new Account();
         account.setUserName(requestDTO.getUserName());
@@ -37,6 +43,7 @@ public class AuthenticationService {
         account.setGender(requestDTO.getGender());
         String rawPassword = account.getPassword();
         account.setPassword(passwordEncoder.encode(rawPassword));
+        account.setRole(requestDTO.getRole());
         Account newAccount = accountRepository.save(account);
         return newAccount;
     }
@@ -58,9 +65,18 @@ public class AuthenticationService {
             loginResponse.setToken(tokenHandler.generateToken(loginAccount));
             return loginResponse;
         } catch (Exception e){
-            // sai tk mk
-            return null;
+            throw new AccountNotFound("Invalid Account");
         }
+    }
+    public Account updateProfile(UpdateRequestDTO updateRequestDTO){
+        Account account = accountUtils.getCurrentAccount();
+        account.setAvatar(updateRequestDTO.getAvatar());
+        account.setEmail(updateRequestDTO.getEmail());
+        account.setPhoneNumber(updateRequestDTO.getPhoneNumber());
+        account.setGender(updateRequestDTO.getGender());
+        account.setFullName(updateRequestDTO.getFullName());
+
+        return accountRepository.save(account);
     }
 
 }

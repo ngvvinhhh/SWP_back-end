@@ -1,21 +1,26 @@
 package vn.vvinh.be.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.vvinh.be.dto.LoginRequestDTO;
 import vn.vvinh.be.dto.RegisterRequestDTO;
+import vn.vvinh.be.dto.UpdateRequestDTO;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.service.AuthenticationService;
+import vn.vvinh.be.utils.AccountUtils;
 
+
+
+@SecurityRequirement(name = "api")
 @RestController
 @CrossOrigin("*")
 public class AuthenticationController {
 
+    @Autowired
+    AccountUtils accountUtils;
     @Autowired
     AuthenticationService authenticationService;
     @PostMapping("/authentication/register")
@@ -35,5 +40,14 @@ public class AuthenticationController {
 //
 //    }
 
+    @GetMapping("profile")
+    public ResponseEntity getProfile(){
+        return ResponseEntity.ok(accountUtils.getCurrentAccount());
+    }
+
+    @PutMapping("profile")
+    public ResponseEntity updateProfile(@RequestBody UpdateRequestDTO account){
+        return ResponseEntity.ok(authenticationService.updateProfile(account));
+    }
 
 }

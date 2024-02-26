@@ -16,4 +16,9 @@ public class AuthenticationHandleException {
     public ResponseEntity<?> serverError(Exception exception){
         return new ResponseEntity<String> (exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(AccountNotFound.class)
+    public ResponseEntity<?> serverError(AccountNotFound exception){
+        return new ResponseEntity<String> (exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

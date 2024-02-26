@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import vn.vvinh.be.enums.Category;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Service {
     double price;
     int quantity;
     String picture;
+    Category category;
 
 //    @OneToMany(mappedBy = "service")
 //    ServiceOfPackage serviceOfPackage;

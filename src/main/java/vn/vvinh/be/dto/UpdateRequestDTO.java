@@ -7,14 +7,11 @@ import vn.vvinh.be.enums.Role;
 
 @Getter
 @Setter
-public class RegisterRequestDTO {
+public class UpdateRequestDTO {
     String avatar;
-    String userName;
-    String password;
     String fullName;
     String phoneNumber;
     String email;
     Gender gender;
     Role role;
-
 }

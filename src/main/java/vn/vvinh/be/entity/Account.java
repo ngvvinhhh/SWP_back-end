@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Account implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    String avatar;
     String userName;
     String password;
     String fullName;
@@ -35,18 +37,22 @@ public class Account implements UserDetails {
     Role role;
 
     @OneToMany(mappedBy = "account")
+            @JsonIgnore
     List<Package> packages;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "schedule_id")  // Corrected column name
     private Schedule schedule;
 
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "wallet_id")
     Wallet wallet;
 
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     List<Rating> ratings;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
