@@ -42,6 +42,7 @@ public class AuthenticationService {
         account.setFullName(requestDTO.getFullName());
         account.setEmail(requestDTO.getEmail());
         account.setGender(requestDTO.getGender());
+        account.setPhoneNumber(requestDTO.getPhoneNumber());
         String rawPassword = account.getPassword();
         account.setPassword(passwordEncoder.encode(rawPassword));
         account.setRole(requestDTO.getRole());
