@@ -36,6 +36,7 @@ public class AuthenticationService {
 
     public Account register(RegisterRequestDTO requestDTO){
         Account account = new Account();
+        account.setAvatar(requestDTO.getAvatar());
         account.setUserName(requestDTO.getUserName());
         account.setPassword(requestDTO.getPassword());
         account.setFullName(requestDTO.getFullName());
