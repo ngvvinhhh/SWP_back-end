@@ -45,7 +45,7 @@ public class TokenHandler {
             date = claims.getExpiration();
             // xuống đc đây => token đúng
         } catch (ExpiredJwtException expiredJwtException) {
-            System.out.println(expiredJwtException.getMessage());
+            expiredJwtException.printStackTrace();
         }
         return date;
     }
