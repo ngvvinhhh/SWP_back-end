@@ -12,6 +12,8 @@ public class LoginResponse {
      String username;
      String fullname;
      String token;
+     String avatar;
+
 
 
 }

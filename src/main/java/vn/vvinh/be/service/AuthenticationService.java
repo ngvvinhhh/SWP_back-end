@@ -65,11 +65,14 @@ public class AuthenticationService {
             loginResponse.setFullname(loginAccount.getFullName());
             loginResponse.setUsername(loginAccount.getUsername());
             loginResponse.setToken(tokenHandler.generateToken(loginAccount));
+            loginResponse.setAvatar(loginAccount.getAvatar());
             return loginResponse;
         } catch (Exception e){
             throw new AccountNotFound("Invalid Account");
         }
     }
+
+
     public Account updateProfile(UpdateRequestDTO updateRequestDTO){
         Account account = accountUtils.getCurrentAccount();
         account.setAvatar(updateRequestDTO.getAvatar());
