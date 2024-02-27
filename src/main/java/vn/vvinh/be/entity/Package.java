@@ -20,8 +20,7 @@ public class Package {
     Long id;
     int capacity;
     String description;
-    String serviceID;
-
+    boolean isDeleted = false;
     @ManyToOne
     @JoinColumn(name = "account_id")
     Account account;

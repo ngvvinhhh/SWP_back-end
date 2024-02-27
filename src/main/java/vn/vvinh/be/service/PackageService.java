@@ -16,11 +16,10 @@ public class PackageService {
     PackageRepository packageRepository;
     @Autowired
     AccountUtils accountUtils;
-    public Package postProduct(PackageRequestDTO packages){
+    public Package postParty(PackageRequestDTO packages){
         Package aPackage = new Package();
         aPackage.setId(packages.getId());
         aPackage.setCapacity(packages.getCapacity());
-        aPackage.setServiceID(packages.getServiceID());
         aPackage.setDescription(packages.getDescription());
         aPackage.setAccount(accountUtils.getCurrentAccount());
         Package newPackage = packageRepository.save(aPackage);
@@ -31,12 +30,21 @@ public class PackageService {
         return packageRepository.findPackagesByAccount(accountUtils.getCurrentAccount());
     }
 
-//    public Package updateAccount(UpdatePackageDTO updatePackageDTO, Long Id){
-//        Package aPackage = packageRepository.findPackageById(Id);
-//        aPackage.setCapacity(updatePackageDTO.getCapacity());
-//        aPackage.setDescription(updatePackageDTO.getDescription());
-//        aPackage.setServiceID(updatePackageDTO.getServiceID());
-//        return packageRepository.save(aPackage);
-//    }
+    public Package updatePackage(UpdatePackageDTO updatePackageDTO, Long Id){
+        Package aPackage = packageRepository.findPackageById(Id);
+        aPackage.setCapacity(updatePackageDTO.getCapacity());
+        aPackage.setDescription(updatePackageDTO.getDescription());
+        return packageRepository.save(aPackage);
+    }
+
+    public Package deletePackage(long id){
+
+        Package aPackage = packageRepository.findPackageById(id);
+        aPackage.setDeleted(true);
+        return  packageRepository.save(aPackage);
+
+        //return   accountRepository.delete(account);
+
+    }
     }
 

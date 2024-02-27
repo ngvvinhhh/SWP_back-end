@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface PackageRepository extends JpaRepository<Package, Long> {
     List<Package> findPackagesByAccount(Account account);
 
-    //Package findPackageById(Long Id);
+    Package findPackageById(Long Id);
 }

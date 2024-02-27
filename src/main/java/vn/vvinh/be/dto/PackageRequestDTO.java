@@ -9,6 +9,4 @@ public class PackageRequestDTO {
     Long id;
     int capacity;
     String description;
-    String serviceID;
-
 }

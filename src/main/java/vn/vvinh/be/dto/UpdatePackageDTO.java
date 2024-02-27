@@ -8,5 +8,4 @@ import lombok.Setter;
 public class UpdatePackageDTO {
     int capacity;
     String description;
-    String serviceID;
 }

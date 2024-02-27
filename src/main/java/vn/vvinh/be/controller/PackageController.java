@@ -17,7 +17,7 @@ public class PackageController {
     PackageService packageService;
     @PostMapping("package")
     public ResponseEntity<Package> postPackage(@RequestBody PackageRequestDTO packages){
-        Package newPackage = packageService.postProduct(packages);
+        Package newPackage = packageService.postParty(packages);
         return ResponseEntity.ok(newPackage);
     }
 
@@ -27,8 +27,11 @@ public class PackageController {
         return ResponseEntity.ok(packageService.getPackageByAccount());
     }
 
-//    @PutMapping("package")
-//    public ResponseEntity updatePackage(@RequestBody UpdatePackageDTO packageDTO, @PathVariable Long Id){
-//        return ResponseEntity.ok(packageService.updateAccount(packageDTO, Id));
-//    }
+    @PutMapping("package/{id}")
+    public ResponseEntity updatePackage(@RequestBody UpdatePackageDTO packageDTO, @PathVariable Long id){
+        return ResponseEntity.ok(packageService.updatePackage(packageDTO, id));
+    }
+
+    @DeleteMapping("package")
+    public ResponseEntity deletePackages(@PathVariable long id){return ResponseEntity.ok(packageService.deletePackage(id));}
 }
