@@ -20,5 +20,5 @@ public class Schedule {
     String date;
 
     @OneToMany(mappedBy = "schedule")
-    private List<Account> accounts;
+    List<Account> accounts;
 }

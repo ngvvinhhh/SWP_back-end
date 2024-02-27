@@ -50,4 +50,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.updateProfile(account));
     }
 
+    @DeleteMapping("profile")
+    public ResponseEntity deleteProfile(@PathVariable long id){
+        return  ResponseEntity.ok(authenticationService.deleteProfile(id));
+    }
+
 }

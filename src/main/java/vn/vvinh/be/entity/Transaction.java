@@ -22,5 +22,7 @@ public class Transaction {
     @JoinColumn(name = "wallet_id")
     Wallet wallet;
 
-
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    Order order;
 }

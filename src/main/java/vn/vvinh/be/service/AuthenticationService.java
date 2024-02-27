@@ -81,4 +81,13 @@ public class AuthenticationService {
         return accountRepository.save(account);
     }
 
+        public Account deleteProfile(long id){
+
+            Account account = accountRepository.findAccountById(id);
+            account.setDeleted(true);
+            return  accountRepository.save(account);
+
+           //return   accountRepository.delete(account);
+
+        }
 }

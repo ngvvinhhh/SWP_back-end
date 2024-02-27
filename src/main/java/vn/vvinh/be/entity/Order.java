@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +20,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String serviceHistoryID;
-    String packageHistoryID;
-    String scheduleID;
-    String hostID;
     double total;
     String time;
 
@@ -31,4 +28,13 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     List<PackageHistory> packageHistories;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    Account account;
+
+    @OneToMany(mappedBy = "order")
+            @JsonIgnore
+    List<Transaction> transactionList;
+
 }

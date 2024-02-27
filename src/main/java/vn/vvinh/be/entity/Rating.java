@@ -16,9 +16,14 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String description;
-
+// noi voi account
     @ManyToOne
     @JoinColumn(name = "account_id")
     Account account;
+//noi voi Order
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    Order order;
+
 
 }

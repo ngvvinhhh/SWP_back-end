@@ -26,18 +26,22 @@ public class Account implements UserDetails {
     long id;
 
     String avatar;
+    @Column(unique = true)
     String userName;
     String password;
     String fullName;
     String phoneNumber;
+    @Column(unique = true)
     String email;
     @Enumerated(EnumType.STRING)
     Gender gender;
     @Enumerated(EnumType.STRING)
     Role role;
+    boolean isDeleted= false;
+
 
     @OneToMany(mappedBy = "account")
-            @JsonIgnore
+    @JsonIgnore
     List<Package> packages;
 
     @ManyToOne
@@ -54,6 +58,11 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     List<Rating> ratings;
+
+    @OneToMany(mappedBy = "account")
+            @JsonIgnore
+    List<Order> orderList;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
