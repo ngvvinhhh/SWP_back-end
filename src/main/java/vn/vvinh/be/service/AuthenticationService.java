@@ -43,7 +43,7 @@ public class AuthenticationService {
         account.setEmail(requestDTO.getEmail());
         account.setGender(requestDTO.getGender());
         account.setPhoneNumber(requestDTO.getPhoneNumber());
-        String rawPassword = account.getPassword();
+        String rawPassword = requestDTO.getPassword();
         account.setPassword(passwordEncoder.encode(rawPassword));
         account.setRole(requestDTO.getRole());
         Account newAccount = accountRepository.save(account);
@@ -68,6 +68,7 @@ public class AuthenticationService {
             loginResponse.setAvatar(loginAccount.getAvatar());
             return loginResponse;
         } catch (Exception e){
+            e.printStackTrace();
             throw new AccountNotFound("Invalid Account");
         }
     }
