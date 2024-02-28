@@ -70,6 +70,7 @@ public class AuthenticationService {
             loginResponse.setUsername(loginAccount.getUsername());
             loginResponse.setToken(tokenHandler.generateToken(loginAccount));
             loginResponse.setAvatar(loginAccount.getAvatar());
+            loginResponse.setRole(loginAccount.getRole());
             return loginResponse;
         } catch (Exception e){
             e.printStackTrace();
@@ -91,6 +92,7 @@ public class AuthenticationService {
             loginResponse.setUsername(account.getUsername());
             loginResponse.setToken(tokenHandler.generateToken(account));
             loginResponse.setAvatar(account.getAvatar());
+            loginResponse.setRole(account.getRole());
             return loginResponse;
         } catch (FirebaseAuthException e) {
             e.printStackTrace();
