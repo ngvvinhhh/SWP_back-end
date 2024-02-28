@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import vn.vvinh.be.dto.LoginGoogleRequest;
 import vn.vvinh.be.dto.LoginRequestDTO;
 import vn.vvinh.be.dto.RegisterRequestDTO;
 import vn.vvinh.be.dto.UpdateRequestDTO;
@@ -35,10 +36,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(newAccount);
     }
 
-//    @PostMapping("/authentication/logingg")
-//    public ResponseEntity logingg(@RequestBody ){
-//
-//    }
+    @PostMapping("/authentication/logingg")
+    public ResponseEntity logingg(@RequestBody LoginGoogleRequest account){
+        LoginResponse  newAccount = authenticationService.logingg(account);
+        return ResponseEntity.ok(newAccount);
+    }
 
     @GetMapping("profile")
     public ResponseEntity getProfile(){
