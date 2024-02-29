@@ -58,6 +58,7 @@ public class ServiceServices  {
         service.setCategory(updateServiceDTO.getCategory());
         service.setPicture(updateServiceDTO.getPicture());
         service.setQuantity(updateServiceDTO.getQuantity());
+        service.setPrice(updateServiceDTO.getPrice());
         return  serviceRepository.save(service);
     }
 
