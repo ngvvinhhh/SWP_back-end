@@ -1,6 +1,5 @@
 package vn.vvinh.be.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +8,7 @@ import vn.vvinh.be.dto.*;
 import vn.vvinh.be.entity.Service;
 import vn.vvinh.be.service.ServiceServices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SecurityRequirement(name = "api")
@@ -17,10 +17,11 @@ import java.util.List;
 public class ServiceController {
     @Autowired
     ServiceServices servicesss;
-    @GetMapping("service")
-    public ResponseEntity getServicesByPackages(PackageRequestIdForServiceDTO packageRequestIdForServiceDTO){
-        List<Service> serviceList = servicesss.getServiceByPackage(packageRequestIdForServiceDTO);
-        return ResponseEntity.ok(serviceList);}
+    @GetMapping("service/{id}")
+    public ResponseEntity getServicesByPackages(@PathVariable long id){
+        List<Service> services = servicesss.getServicesByPackage(id);
+
+        return ResponseEntity.ok(services);}
 
     @PostMapping("service")
     public ResponseEntity createService(@RequestBody ServiceRequestDTO serviceRequestDTO){

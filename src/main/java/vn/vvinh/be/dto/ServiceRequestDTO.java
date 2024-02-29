@@ -1,5 +1,6 @@
 package vn.vvinh.be.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import vn.vvinh.be.enums.Category;
@@ -12,4 +13,5 @@ public class ServiceRequestDTO {
     int quantity;
     String picture;
     Category category;
+    long packageId;
 }

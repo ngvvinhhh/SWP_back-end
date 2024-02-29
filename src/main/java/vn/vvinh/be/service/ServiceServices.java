@@ -12,6 +12,7 @@ import vn.vvinh.be.repository.PackageRepository;
 import vn.vvinh.be.repository.ServiceRepository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,22 +28,29 @@ public class ServiceServices  {
     public vn.vvinh.be.entity.Service createService(ServiceRequestDTO serviceRequestDTO){
 
         vn.vvinh.be.entity.Service service = new vn.vvinh.be.entity.Service();
-        service.setId(serviceRequestDTO.getId());
+        if(serviceRequestDTO.getPackageId() != 0){
+            List<Package> list = new ArrayList<>();
+            List<vn.vvinh.be.entity.Service> services = new ArrayList<>();
+            Package aPackage = packageRepository.findPackageById(serviceRequestDTO.getPackageId());
+            list.add(aPackage);
+            services.add(service);
+            service.setPackages(list);
+            aPackage.setServices(services);
+        }
         service.setServiceName(serviceRequestDTO.getServiceName());
         service.setCategory(serviceRequestDTO.getCategory());
         service.setPicture(serviceRequestDTO.getPicture());
         service.setQuantity(serviceRequestDTO.getQuantity());
+        service.setPrice(serviceRequestDTO.getPrice());
         vn.vvinh.be.entity.Service newService = serviceRepository.save(service);
         return newService;
     }
-    public List<vn.vvinh.be.entity.Service> getServiceByPackage(PackageRequestIdForServiceDTO packageRequestIdForServiceDTO){
-        Package packageEntity = packageRepository.findPackageById(packageRequestIdForServiceDTO.getId());
-        return serviceRepository.findServicesByPackagesContaining(packageEntity);
-    }
 
-//    public vn.vvinh.be.entity.Service getAllService(ServiceRequestDTO serviceRequestDTO){
-//        vn.vvinh.be.entity.Service service = serviceRepository.findAllService();
-//    }
+    public List<vn.vvinh.be.entity.Service> getServicesByPackage(long packageId){
+        Package aPackage = packageRepository.findPackageById(packageId);
+        List<vn.vvinh.be.entity.Service> services = serviceRepository.findServicesByPackagesContaining(aPackage);
+        return services;
+    }
 
     public vn.vvinh.be.entity.Service updateService(UpdateServiceDTO updateServiceDTO, long Id){
         vn.vvinh.be.entity.Service service = serviceRepository.findServiceById(Id);

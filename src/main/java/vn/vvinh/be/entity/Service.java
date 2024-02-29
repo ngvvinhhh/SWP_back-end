@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +29,8 @@ public class Service {
 
 //    @OneToMany(mappedBy = "service")
 //    ServiceOfPackage serviceOfPackage;
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "services", cascade = CascadeType.ALL)
+        @JsonIgnore
     List<Package> packages;
 
 

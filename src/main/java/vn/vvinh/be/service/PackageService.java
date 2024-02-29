@@ -3,9 +3,11 @@ package vn.vvinh.be.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.vvinh.be.dto.PackageRequestDTO;
+import vn.vvinh.be.dto.PackageRequestIdForServiceDTO;
 import vn.vvinh.be.dto.UpdatePackageDTO;
 import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.repository.PackageRepository;
+import vn.vvinh.be.repository.ServiceRepository;
 import vn.vvinh.be.utils.AccountUtils;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class PackageService {
     PackageRepository packageRepository;
     @Autowired
     AccountUtils accountUtils;
+
+    @Autowired
+    ServiceRepository serviceRepository;
     public Package postParty(PackageRequestDTO packages){
         Package aPackage = new Package();
         aPackage.setId(packages.getId());
@@ -43,5 +48,26 @@ public class PackageService {
         aPackage.setDeleted(true);
         return  packageRepository.save(aPackage);
     }
+
+    public List<vn.vvinh.be.entity.Service> getServiceByPackage(long id){
+
+        Package aPackage = packageRepository.findPackageById(id);
+
+//        List<ServiceRequestDTO> serviceRequestDTO = new ArrayList<>();
+//        for(ServiceRequestDTO packageEntity : serviceRequestDTO){
+//            if (aPackage == packageEntity.getPackageId()){
+//                ArrayList<vn.vvinh.be.entity.Service> services = new ArrayList<>();
+//
+//            }
+//        }
+        List<vn.vvinh.be.entity.Service> services = serviceRepository.findServicesByPackagesContaining(aPackage);
+        return services;
+    }
+
+//    public vn.vvinh.be.entity.Service getAllService(ServiceRequestDTO serviceRequestDTO){
+//        vn.vvinh.be.entity.Service service = serviceRepository.findAllService();
+//    }
+
+
     }
 
