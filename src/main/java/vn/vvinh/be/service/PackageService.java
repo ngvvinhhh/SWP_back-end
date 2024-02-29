@@ -30,7 +30,7 @@ public class PackageService {
         return packageRepository.findPackagesByAccount(accountUtils.getCurrentAccount());
     }
 
-    public Package updatePackage(UpdatePackageDTO updatePackageDTO, Long Id){
+    public Package updatePackage(UpdatePackageDTO updatePackageDTO, long Id){
         Package aPackage = packageRepository.findPackageById(Id);
         aPackage.setCapacity(updatePackageDTO.getCapacity());
         aPackage.setDescription(updatePackageDTO.getDescription());
@@ -42,9 +42,6 @@ public class PackageService {
         Package aPackage = packageRepository.findPackageById(id);
         aPackage.setDeleted(true);
         return  packageRepository.save(aPackage);
-
-        //return   accountRepository.delete(account);
-
     }
     }
 

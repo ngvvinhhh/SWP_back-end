@@ -28,10 +28,10 @@ public class PackageController {
     }
 
     @PutMapping("package/{id}")
-    public ResponseEntity updatePackage(@RequestBody UpdatePackageDTO packageDTO, @PathVariable Long id){
+    public ResponseEntity updatePackage(@RequestBody UpdatePackageDTO packageDTO, @PathVariable long id){
         return ResponseEntity.ok(packageService.updatePackage(packageDTO, id));
     }
 
-    @DeleteMapping("package")
+    @DeleteMapping("package/{id}")
     public ResponseEntity deletePackages(@PathVariable long id){return ResponseEntity.ok(packageService.deletePackage(id));}
 }

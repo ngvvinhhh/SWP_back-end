@@ -96,7 +96,7 @@ public class AuthenticationService {
             return loginResponse;
         } catch (FirebaseAuthException e) {
             e.printStackTrace();
-            System.out.println(e);
+            //System.out.println(e);
         }
         return null;
     }

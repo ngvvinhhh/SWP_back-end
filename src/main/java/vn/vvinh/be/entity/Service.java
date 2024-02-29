@@ -24,6 +24,7 @@ public class Service {
     int quantity;
     String picture;
     Category category;
+    Boolean isDeleted = false;
 
 //    @OneToMany(mappedBy = "service")
 //    ServiceOfPackage serviceOfPackage;
