@@ -11,6 +11,7 @@ import vn.vvinh.be.dto.UpdateRequestDTO;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.service.AuthenticationService;
+import vn.vvinh.be.service.EmailService;
 import vn.vvinh.be.utils.AccountUtils;
 
 
@@ -56,5 +57,17 @@ public class AuthenticationController {
     public ResponseEntity deleteProfile(@PathVariable long id){
         return  ResponseEntity.ok(authenticationService.deleteProfile(id));
     }
+
+    @GetMapping("verify")
+    public ResponseEntity verify(@RequestParam String token){
+        authenticationService.verify(token);
+        return ResponseEntity.ok("Confirm email success!");
+    }
+
+//    @GetMapping("/testSendMail")
+//    public ResponseEntity testSendMail(){
+//        service.sendMailTemplate(registerRequestDTO);
+//        return  ResponseEntity.ok("success");
+//    }
 
 }

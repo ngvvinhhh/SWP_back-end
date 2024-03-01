@@ -38,6 +38,9 @@ public class AuthenticationService {
     @Autowired
     AccountUtils accountUtils;
 
+    @Autowired
+    EmailService emailService;
+
     public Account register(RegisterRequestDTO requestDTO){
         Account account = new Account();
         account.setAvatar(requestDTO.getAvatar());
@@ -51,7 +54,20 @@ public class AuthenticationService {
         account.setPassword(passwordEncoder.encode(rawPassword));
         account.setRole(requestDTO.getRole());
         Account newAccount = accountRepository.save(account);
+        emailService.sendMailTemplate(newAccount);
         return newAccount;
+    }
+
+    public void verify(String token){
+        try{
+            String username = tokenHandler.getInfoByToken(token);
+            // => token chuan
+            Account account = accountRepository.findByUserName(username).get();
+            account.setVerify(true);
+            accountRepository.save(account);
+        }catch (Exception e){
+            throw new AccountNotFound("Invalid account");
+        }
     }
 
     public LoginResponse login(LoginRequestDTO loginRequestDTO){

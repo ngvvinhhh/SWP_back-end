@@ -37,4 +37,10 @@ public class Order {
             @JsonIgnore
     List<Transaction> transactionList;
 
+    @OneToOne()
+    @JoinColumn(name = "rating_id")
+    @JsonIgnore
+    Rating rating;
+
+
 }

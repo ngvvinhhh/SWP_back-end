@@ -38,7 +38,7 @@ public class Account implements UserDetails {
     @Enumerated(EnumType.STRING)
     Role role;
     boolean isDeleted= false;
-
+    boolean isVerify = false;
 
     @OneToMany(mappedBy = "account")
     @JsonIgnore

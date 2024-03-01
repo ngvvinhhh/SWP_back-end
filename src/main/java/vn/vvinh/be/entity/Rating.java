@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +22,7 @@ public class Rating {
     @JoinColumn(name = "account_id")
     Account account;
 //noi voi Order
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    Order order;
+
 
 
 }
