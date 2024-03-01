@@ -21,6 +21,7 @@ public class PackageHistory {
     String category;
     int capacity;
     String description;
+    String picture;
 
     @ManyToMany
     @JoinTable(

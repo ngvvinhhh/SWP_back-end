@@ -20,7 +20,11 @@ public class Package {
     Long id;
     int capacity;
     String description;
+    String picture;
+    String category;
+
     boolean isDeleted = false;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     Account account;
