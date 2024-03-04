@@ -41,7 +41,7 @@ public class AuthenticationService {
     @Autowired
     EmailService emailService;
 
-    public Account register(RegisterRequestDTO requestDTO){
+    public Account register(RegisterRequestDTO requestDTO) {
         Account account = new Account();
         account.setAvatar(requestDTO.getAvatar());
         account.setUserName(requestDTO.getUserName());
@@ -58,28 +58,35 @@ public class AuthenticationService {
         return newAccount;
     }
 
-    public void verify(String token){
-        try{
+    public void verify(String token) {
+        try {
             String username = tokenHandler.getInfoByToken(token);
             // => token chuan
             Account account = accountRepository.findByUserName(username).get();
             account.setVerify(true);
             accountRepository.save(account);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new AccountNotFound("Invalid account");
         }
     }
 
-    public LoginResponse login(LoginRequestDTO loginRequestDTO){
+    public LoginResponse login(LoginRequestDTO loginRequestDTO) {
         Authentication authentication;
-        try{
+        Account loginAccount = null;
+        try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-               loginRequestDTO.getUserName(),
-               loginRequestDTO.getPassword()
+                    loginRequestDTO.getUserName(),
+                    loginRequestDTO.getPassword()
             ));
-            Account loginAccount = (Account) authentication.getPrincipal();
+            loginAccount = (Account) authentication.getPrincipal();
             // dang nhap thanh cong
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AccountNotFound("Invalid Account");
 
+        }
+
+        if (loginAccount.isVerify()) {
             LoginResponse loginResponse = new LoginResponse();
             loginResponse.setId(loginAccount.getId());
             loginResponse.setFullname(loginAccount.getFullName());
@@ -88,11 +95,12 @@ public class AuthenticationService {
             loginResponse.setAvatar(loginAccount.getAvatar());
             loginResponse.setRole(loginAccount.getRole());
             return loginResponse;
-        } catch (Exception e){
-            e.printStackTrace();
-            throw new AccountNotFound("Invalid Account");
+        }else {
+            throw new AccountNotFound("Please confirm your email!");
         }
+        //return  null;
     }
+
 
     public LoginResponse logingg(LoginGoogleRequest loginGoogleRequest) {
         try {
@@ -111,8 +119,8 @@ public class AuthenticationService {
             loginResponse.setRole(account.getRole());
             return loginResponse;
         } catch (FirebaseAuthException e) {
-            e.printStackTrace();
-            //System.out.println(e);
+            //e.printStackTrace();
+            System.out.println(e);
         }
         return null;
     }

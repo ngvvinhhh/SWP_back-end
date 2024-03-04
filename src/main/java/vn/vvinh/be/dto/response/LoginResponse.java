@@ -15,6 +15,8 @@ public class LoginResponse {
      String token;
      String avatar;
      Role role;
+     boolean isDeleted;
+     boolean isVerify;
 
 
 }
