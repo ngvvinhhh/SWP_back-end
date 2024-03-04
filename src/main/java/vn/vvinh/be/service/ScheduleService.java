@@ -7,6 +7,8 @@ import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.entity.Schedule;
 import vn.vvinh.be.repository.AccountRepository;
 import vn.vvinh.be.repository.ScheduleRepository;
+import vn.vvinh.be.utils.AccountUtils;
+
 import java.util.List;
 @Service
 public class ScheduleService {
@@ -17,21 +19,34 @@ public class ScheduleService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    AccountUtils accountUtils;
+
     public Schedule postSchedule(ScheduleRequestDTO scheduleRequestDTO){
         Schedule schedule = new Schedule();
-        Account account = accountRepository.findAccountById(scheduleRequestDTO.getAccountID());
+        Account account = accountUtils.getCurrentAccount();
         schedule.setAccount(account);
-        account.setSchedule(schedule);
-        schedule.setTimeFrom(scheduleRequestDTO.getTimeFrom());
-        schedule.setTimeTo(scheduleRequestDTO.getTimeTo());
+        schedule.setTime(scheduleRequestDTO.getTime());
         Schedule newSchedule = scheduleRepository.save(schedule);
         return newSchedule;
     }
 
+    public List<Schedule> getScheduleByHostId(int hostId) {
+        return scheduleRepository.findScheduleDTOsByAccountId(hostId);
+    }
+
+
+
+    public Schedule saveSchedule(ScheduleRequestDTO scheduleDTO) {
+        Schedule schedule = new Schedule();
+        schedule.setTime(scheduleDTO.getTime());
+        schedule.setAccount(accountUtils.getCurrentAccount());
+        return scheduleRepository.save(schedule);
+    }
+
     public Schedule updateSchedule(ScheduleRequestDTO scheduleRequestDTO, long id){
         Schedule schedule = scheduleRepository.getScheduleById(id);
-        schedule.setTimeFrom(scheduleRequestDTO.getTimeFrom());
-        schedule.setTimeTo(scheduleRequestDTO.getTimeTo());
+        schedule.setTime(scheduleRequestDTO.getTime());
         return scheduleRepository.save(schedule);
     }
 

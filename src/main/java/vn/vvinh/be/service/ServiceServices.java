@@ -27,8 +27,9 @@ public class ServiceServices  {
 
         vn.vvinh.be.entity.Service service = new vn.vvinh.be.entity.Service();
         if(serviceRequestDTO.getPackageId() != 0){
-            List<Package> list = new ArrayList<>();
+
             Package aPackage = packageRepository.findPackageById(serviceRequestDTO.getPackageId());
+            List<Package> list = new ArrayList<>();
             List<vn.vvinh.be.entity.Service> services = aPackage.getServices();
             list.add(aPackage);
             services.add(service);

@@ -27,9 +27,10 @@ public class ScheduleController {
     public ResponseEntity updateSchedule(@RequestBody ScheduleRequestDTO scheduleRequestDTO, @PathVariable long id){
         return  ResponseEntity.ok(scheduleService.updateSchedule(scheduleRequestDTO, id));
     }
-    @GetMapping("schedule/getSchduleByHost/{id}")
-    public  ResponseEntity<List<Schedule>> getSchedule(@PathVariable long hostId){
-        return  ResponseEntity.ok((scheduleService.getAllScheduleByOneHost(hostId)));
+    @GetMapping("schedule/getSchduleByHost/{hostId}")
+    public  ResponseEntity<List<Schedule>> getScheduleByHostId(@PathVariable int hostId){
+        List<Schedule> schedule = scheduleService.getScheduleByHostId(hostId);
+        return ResponseEntity.ok(schedule);
     }
 
     @DeleteMapping("schedule/deleteSchedule/{id}")

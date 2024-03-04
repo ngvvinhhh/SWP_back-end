@@ -24,7 +24,6 @@ public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-
     String avatar;
     @Column(unique = true)
     String userName;
@@ -44,10 +43,9 @@ public class Account implements UserDetails {
     @JsonIgnore
     List<Package> packages;
 
-    @OneToOne
+    @OneToMany(mappedBy = "account")
     @JsonIgnore
-    @JoinColumn(name = "schedule_id")
-    Schedule schedule;
+    List<Schedule> schedules;
 
 
     @OneToOne

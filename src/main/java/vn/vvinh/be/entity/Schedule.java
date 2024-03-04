@@ -18,10 +18,10 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    Time timeFrom;
-    Time timeTo;
+    Time time;
     boolean isDeleted = false;
-    @OneToOne(mappedBy = "schedule")
+
+    @ManyToOne()
     @JoinColumn(name = "account_id")
     Account account;
 

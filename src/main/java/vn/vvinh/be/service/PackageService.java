@@ -36,6 +36,10 @@ public class PackageService {
         return packageRepository.findPackagesByAccount(accountUtils.getCurrentAccount());
     }
 
+    public List<Package> getPackageByAccountId(int hostId){
+        return packageRepository.findPackagesByAccountId(hostId);
+    }
+
     public Package updatePackage(UpdatePackageDTO updatePackageDTO, long Id){
         Package aPackage = packageRepository.findPackageById(Id);
         aPackage.setCapacity(updatePackageDTO.getCapacity());

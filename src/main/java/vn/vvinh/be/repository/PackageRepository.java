@@ -9,6 +9,8 @@ import java.util.List;
 public interface PackageRepository extends JpaRepository<Package, Long> {
     List<Package> findPackagesByAccount(Account account);
 
+    List<Package> findPackagesByAccountId(long id);
+
     Package findPackageById(Long Id);
 
 }

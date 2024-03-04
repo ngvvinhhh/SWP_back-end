@@ -21,6 +21,11 @@ public class PackageController {
         return ResponseEntity.ok(newPackage);
     }
 
+    @GetMapping("package/getPackages/{id}")
+    public ResponseEntity getPackagesByAccountId(@PathVariable int id){
+        return ResponseEntity.ok(packageService.getPackageByAccountId(id));
+    }
+
 
     @GetMapping("package/getPackages")
     public ResponseEntity getPackages(){
