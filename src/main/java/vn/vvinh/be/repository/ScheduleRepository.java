@@ -7,6 +7,6 @@ import vn.vvinh.be.entity.Schedule;
 import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-    List<Schedule> getAllScheduleByAccounts(Account account);
+    List<Schedule> getAllScheduleByAccount(Account account);
     Schedule getScheduleById(long id);
 }

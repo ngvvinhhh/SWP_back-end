@@ -7,5 +7,7 @@ import java.sql.Time;
 @Getter
 @Setter
 public class ScheduleRequestDTO {
-    Time date;
+    Time timeFrom;
+    Time timeTo;
+    long accountID;
 }
