@@ -28,8 +28,8 @@ public class ServiceServices  {
         vn.vvinh.be.entity.Service service = new vn.vvinh.be.entity.Service();
         if(serviceRequestDTO.getPackageId() != 0){
             List<Package> list = new ArrayList<>();
-            List<vn.vvinh.be.entity.Service> services = new ArrayList<>();
             Package aPackage = packageRepository.findPackageById(serviceRequestDTO.getPackageId());
+            List<vn.vvinh.be.entity.Service> services = aPackage.getServices();
             list.add(aPackage);
             services.add(service);
             service.setPackages(list);
