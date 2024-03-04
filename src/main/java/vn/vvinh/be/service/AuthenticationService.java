@@ -87,6 +87,7 @@ public class AuthenticationService {
             loginResponse.setToken(tokenHandler.generateToken(loginAccount));
             loginResponse.setAvatar(loginAccount.getAvatar());
             loginResponse.setRole(loginAccount.getRole());
+
             return loginResponse;
         } catch (Exception e){
             e.printStackTrace();

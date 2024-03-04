@@ -25,6 +25,8 @@ public class PackageService {
         aPackage.setId(packages.getId());
         aPackage.setCapacity(packages.getCapacity());
         aPackage.setDescription(packages.getDescription());
+        aPackage.setPicture(packages.getPicture());
+        aPackage.setCategory(packages.getCategory());
         aPackage.setAccount(accountUtils.getCurrentAccount());
         Package newPackage = packageRepository.save(aPackage);
         return newPackage;
@@ -38,6 +40,8 @@ public class PackageService {
         Package aPackage = packageRepository.findPackageById(Id);
         aPackage.setCapacity(updatePackageDTO.getCapacity());
         aPackage.setDescription(updatePackageDTO.getDescription());
+        aPackage.setPicture(updatePackageDTO.getPicture());
+        aPackage.setCategory(updatePackageDTO.getCategory());
         return packageRepository.save(aPackage);
     }
 
@@ -51,22 +55,8 @@ public class PackageService {
     public List<vn.vvinh.be.entity.Service> getServiceByPackage(long id){
 
         Package aPackage = packageRepository.findPackageById(id);
-
-//        List<ServiceRequestDTO> serviceRequestDTO = new ArrayList<>();
-//        for(ServiceRequestDTO packageEntity : serviceRequestDTO){
-//            if (aPackage == packageEntity.getPackageId()){
-//                ArrayList<vn.vvinh.be.entity.Service> services = new ArrayList<>();
-//
-//            }
-//        }
         List<vn.vvinh.be.entity.Service> services = serviceRepository.findServicesByPackagesContaining(aPackage);
         return services;
     }
-
-//    public vn.vvinh.be.entity.Service getAllService(ServiceRequestDTO serviceRequestDTO){
-//        vn.vvinh.be.entity.Service service = serviceRepository.findAllService();
-//    }
-
-
     }
 

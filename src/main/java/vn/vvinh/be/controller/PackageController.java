@@ -15,23 +15,23 @@ import vn.vvinh.be.service.PackageService;
 public class PackageController {
     @Autowired
     PackageService packageService;
-    @PostMapping("package")
+    @PostMapping("package/postNewPackage")
     public ResponseEntity<Package> postPackage(@RequestBody PackageRequestDTO packages){
         Package newPackage = packageService.postParty(packages);
         return ResponseEntity.ok(newPackage);
     }
 
 
-    @GetMapping("package")
+    @GetMapping("package/getPackages")
     public ResponseEntity getPackages(){
         return ResponseEntity.ok(packageService.getPackageByAccount());
     }
 
-    @PutMapping("package/{id}")
+    @PutMapping("package/updatePackage/{id}")
     public ResponseEntity updatePackage(@RequestBody UpdatePackageDTO packageDTO, @PathVariable long id){
         return ResponseEntity.ok(packageService.updatePackage(packageDTO, id));
     }
 
-    @DeleteMapping("package/{id}")
+    @DeleteMapping("package/deletePackage/{id}")
     public ResponseEntity deletePackages(@PathVariable long id){return ResponseEntity.ok(packageService.deletePackage(id));}
 }

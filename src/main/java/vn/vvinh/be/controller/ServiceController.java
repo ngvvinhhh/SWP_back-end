@@ -17,24 +17,24 @@ import java.util.List;
 public class ServiceController {
     @Autowired
     ServiceServices servicesss;
-    @GetMapping("service/{id}")
+    @GetMapping("service/getService/{id}")
     public ResponseEntity getServicesByPackages(@PathVariable long id){
         List<Service> services = servicesss.getServicesByPackage(id);
 
         return ResponseEntity.ok(services);}
 
-    @PostMapping("service")
+    @PostMapping("service/createService")
     public ResponseEntity createService(@RequestBody ServiceRequestDTO serviceRequestDTO){
         Service service = servicesss.createService(serviceRequestDTO);
         return  ResponseEntity.ok(service);
     }
 
-    @PutMapping("service/{id}")
-    public ResponseEntity updatePackage(@RequestBody UpdateServiceDTO updateServiceDTO, @PathVariable long id){
+    @PutMapping("service/updateService/{id}")
+    public ResponseEntity updateService(@RequestBody UpdateServiceDTO updateServiceDTO, @PathVariable long id){
         return ResponseEntity.ok(servicesss.updateService(updateServiceDTO, id));
     }
 
-    @DeleteMapping("service/{id}")
+    @DeleteMapping("service/deleteService/{id}")
     public ResponseEntity deleteService(@PathVariable long id){return ResponseEntity.ok(servicesss.deleteService(id));}
 
 }

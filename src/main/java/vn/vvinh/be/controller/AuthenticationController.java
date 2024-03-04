@@ -43,17 +43,17 @@ public class AuthenticationController {
         return ResponseEntity.ok(newAccount);
     }
 
-    @GetMapping("profile")
+    @GetMapping("profile/getProfile")
     public ResponseEntity getProfile(){
         return ResponseEntity.ok(accountUtils.getCurrentAccount());
     }
 
-    @PutMapping("profile")
+    @PutMapping("profile/updateProfile")
     public ResponseEntity updateProfile(@RequestBody UpdateRequestDTO account){
         return ResponseEntity.ok(authenticationService.updateProfile(account));
     }
 
-    @DeleteMapping("profile")
+    @DeleteMapping("profile/deleteProfile/{id}")
     public ResponseEntity deleteProfile(@PathVariable long id){
         return  ResponseEntity.ok(authenticationService.deleteProfile(id));
     }
