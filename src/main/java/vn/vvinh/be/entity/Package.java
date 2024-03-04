@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import vn.vvinh.be.enums.Category;
 
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class Package {
     int capacity;
     String description;
     String picture;
-    String category;
-
+    Category category;
     boolean isDeleted = false;
 
     @ManyToOne
@@ -35,8 +35,6 @@ public class Package {
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
     List<Service> services;
-
-
 }
 
 

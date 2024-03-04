@@ -94,6 +94,7 @@ public class AuthenticationService {
             loginResponse.setToken(tokenHandler.generateToken(loginAccount));
             loginResponse.setAvatar(loginAccount.getAvatar());
             loginResponse.setRole(loginAccount.getRole());
+
             return loginResponse;
         }else {
             throw new AccountNotFound("Please confirm your email!");
