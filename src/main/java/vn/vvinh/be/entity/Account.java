@@ -44,10 +44,10 @@ public class Account implements UserDetails {
     @JsonIgnore
     List<Package> packages;
 
-    @ManyToOne
+    @OneToOne
     @JsonIgnore
-    @JoinColumn(name = "schedule_id")  // Corrected column name
-    private Schedule schedule;
+    @JoinColumn(name = "schedule_id")
+    Schedule schedule;
 
 
     @OneToOne
