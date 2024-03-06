@@ -20,6 +20,7 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @Column(columnDefinition = "nvarchar(255)")
     String serviceName;
     double price;
     int quantity;

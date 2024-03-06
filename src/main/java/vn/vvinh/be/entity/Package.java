@@ -19,8 +19,10 @@ public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column(columnDefinition = "nvarchar(255)")
     String name;
     int capacity;
+    @Column(columnDefinition = "nvarchar(255)")
     String description;
     String picture;
     Category category;
