@@ -23,6 +23,7 @@ public class PackageService {
     public Package postParty(PackageRequestDTO packages){
         Package aPackage = new Package();
         aPackage.setId(packages.getId());
+        aPackage.setName(packages.getName());
         aPackage.setCapacity(packages.getCapacity());
         aPackage.setDescription(packages.getDescription());
         aPackage.setPicture(packages.getPicture());

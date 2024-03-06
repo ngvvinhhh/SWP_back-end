@@ -8,6 +8,7 @@ import vn.vvinh.be.enums.Category;
 @Setter
 public class PackageRequestDTO {
     Long id;
+    String name;
     int capacity;
     String description;
     String picture;

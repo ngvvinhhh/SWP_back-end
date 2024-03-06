@@ -19,6 +19,7 @@ public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String name;
     int capacity;
     String description;
     String picture;
