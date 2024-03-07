@@ -61,6 +61,10 @@ public class Account implements UserDetails {
             @JsonIgnore
     List<Order> orderList;
 
+    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    List<Service> services;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

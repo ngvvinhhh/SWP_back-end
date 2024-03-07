@@ -35,5 +35,9 @@ public class Service {
     List<Package> packages;
 
 
+    @ManyToOne()
+    @JoinColumn(name = "account_id")
+    Account account;
+
 
 }

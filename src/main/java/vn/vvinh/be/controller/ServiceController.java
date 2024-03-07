@@ -23,6 +23,11 @@ public class ServiceController {
 
         return ResponseEntity.ok(services);}
 
+    @GetMapping("service/getService/host/{id}")
+    public ResponseEntity getPackagesByHostId(@PathVariable int id){
+        return ResponseEntity.ok(servicesss.getPackageByHostId(id));
+    }
+
     @PostMapping("service/createService")
     public ResponseEntity createService(@RequestBody ServiceRequestDTO serviceRequestDTO){
         Service service = servicesss.createService(serviceRequestDTO);

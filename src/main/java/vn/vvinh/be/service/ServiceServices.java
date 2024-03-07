@@ -6,6 +6,7 @@ import vn.vvinh.be.dto.ServiceRequestDTO;
 
 import vn.vvinh.be.dto.UpdateServiceDTO;
 import vn.vvinh.be.entity.Package;
+import vn.vvinh.be.entity.Schedule;
 import vn.vvinh.be.repository.PackageRepository;
 import vn.vvinh.be.repository.ServiceRepository;
 
@@ -49,6 +50,10 @@ public class ServiceServices  {
         Package aPackage = packageRepository.findPackageById(packageId);
         List<vn.vvinh.be.entity.Service> services = serviceRepository.findServicesByPackagesContaining(aPackage);
         return services;
+    }
+
+    public List<vn.vvinh.be.entity.Service> getPackageByHostId(int hostId){
+        return serviceRepository.findServicesByAccountId(hostId);
     }
 
     public vn.vvinh.be.entity.Service updateService(UpdateServiceDTO updateServiceDTO, long Id){
