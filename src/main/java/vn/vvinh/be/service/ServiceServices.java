@@ -9,6 +9,7 @@ import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.entity.Schedule;
 import vn.vvinh.be.repository.PackageRepository;
 import vn.vvinh.be.repository.ServiceRepository;
+import vn.vvinh.be.utils.AccountUtils;
 
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Service
 public class ServiceServices  {
+    @Autowired
+    AccountUtils accountUtils;
     @Autowired
     ServiceRepository serviceRepository;
     @Autowired
@@ -36,6 +39,7 @@ public class ServiceServices  {
             services.add(service);
             service.setPackages(list);
             aPackage.setServices(services);
+            service.setAccount(accountUtils.getCurrentAccount());
         }
         service.setServiceName(serviceRequestDTO.getServiceName());
         service.setCategory(serviceRequestDTO.getCategory());
