@@ -28,6 +28,7 @@ public class PackageService {
         aPackage.setDescription(packages.getDescription());
         aPackage.setPicture(packages.getPicture());
         aPackage.setCategory(packages.getCategory());
+        aPackage.setPrice(packages.getPrice());
         aPackage.setAccount(accountUtils.getCurrentAccount());
         Package newPackage = packageRepository.save(aPackage);
         return newPackage;

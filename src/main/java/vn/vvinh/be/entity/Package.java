@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import vn.vvinh.be.enums.Category;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,7 @@ public class Package {
     Long id;
     @Column(columnDefinition = "nvarchar(255)")
     String name;
+    BigDecimal price;
     int capacity;
     @Column(columnDefinition = "nvarchar(255)")
     String description;
