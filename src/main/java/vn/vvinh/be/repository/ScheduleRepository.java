@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     List<Schedule> getAllScheduleByAccount(Account account);
-    Schedule getScheduleById(long id);
+    Schedule findScheduleById(long id);
 
     List<Schedule> findScheduleDTOsByAccountId(long id);
 

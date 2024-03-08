@@ -45,13 +45,13 @@ public class ScheduleService {
     }
 
     public Schedule updateSchedule(ScheduleRequestDTO scheduleRequestDTO, long id){
-        Schedule schedule = scheduleRepository.getScheduleById(id);
+        Schedule schedule = scheduleRepository.findScheduleById(id);
         schedule.setTime(scheduleRequestDTO.getTime());
         return scheduleRepository.save(schedule);
     }
 
     public Schedule deleteSchedule(long id){
-        Schedule schedule = scheduleRepository.getScheduleById(id);
+        Schedule schedule = scheduleRepository.findScheduleById(id);
         schedule.setDeleted(true);
         return scheduleRepository.save(schedule);
     }

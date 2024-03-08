@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import vn.vvinh.be.enums.Category;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -18,7 +20,9 @@ public class PackageHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String category;
+    String name;
+    Category category;
+    BigDecimal price;
     int capacity;
     String description;
     String picture;

@@ -7,7 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.scheduling.annotation.Scheduled;
+import vn.vvinh.be.enums.OrderStatus;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -20,8 +23,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
     double total;
-    String time;
+    Date date;
 
     @OneToMany(mappedBy = "order")
     List<ServiceHistory> serviceHistories;
@@ -34,7 +38,7 @@ public class Order {
     Account account;
 
     @OneToMany(mappedBy = "order")
-            @JsonIgnore
+    @JsonIgnore
     List<Transaction> transactionList;
 
     @OneToOne()
@@ -42,5 +46,12 @@ public class Order {
     @JsonIgnore
     Rating rating;
 
+    @Column(nullable = false)
+    Schedule schedule;
 
+    @Column
+    Date createAt;
+
+    @Column
+    OrderStatus status;
 }
