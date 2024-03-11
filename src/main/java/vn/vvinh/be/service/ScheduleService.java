@@ -32,7 +32,7 @@ public class ScheduleService {
     }
 
     public List<Schedule> getScheduleByHostId(int hostId) {
-        return scheduleRepository.findScheduleDTOsByAccountId(hostId);
+        return scheduleRepository.findScheduleByAccountId(hostId);
     }
 
 

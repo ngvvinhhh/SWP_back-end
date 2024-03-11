@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.scheduling.annotation.Scheduled;
 import vn.vvinh.be.enums.OrderStatus;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name =  "Orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;

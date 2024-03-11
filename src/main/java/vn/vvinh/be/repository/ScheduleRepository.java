@@ -10,6 +10,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     List<Schedule> getAllScheduleByAccount(Account account);
     Schedule findScheduleById(long id);
 
-    List<Schedule> findScheduleDTOsByAccountId(long id);
+    List<Schedule> findScheduleByAccountId(long id);
 
 }
