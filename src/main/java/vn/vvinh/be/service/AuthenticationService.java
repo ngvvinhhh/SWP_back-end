@@ -9,16 +9,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import vn.vvinh.be.dto.LoginGoogleRequest;
-import vn.vvinh.be.dto.LoginRequestDTO;
-import vn.vvinh.be.dto.RegisterRequestDTO;
-import vn.vvinh.be.dto.UpdateRequestDTO;
+import vn.vvinh.be.dto.*;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
+import vn.vvinh.be.enums.Role;
 import vn.vvinh.be.exception.AccountNotFound;
 import vn.vvinh.be.repository.AccountRepository;
 import vn.vvinh.be.security.TokenHandler;
 import vn.vvinh.be.utils.AccountUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AuthenticationService {
@@ -146,4 +147,8 @@ public class AuthenticationService {
            //return   accountRepository.delete(account);
 
         }
+
+    public List<Account> getAllAccountHost() {
+        return accountRepository.getAllAccountByRole(Role.HOST);
+    }
 }

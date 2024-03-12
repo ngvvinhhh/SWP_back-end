@@ -4,16 +4,14 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vn.vvinh.be.dto.LoginGoogleRequest;
-import vn.vvinh.be.dto.LoginRequestDTO;
-import vn.vvinh.be.dto.RegisterRequestDTO;
-import vn.vvinh.be.dto.UpdateRequestDTO;
+import vn.vvinh.be.dto.*;
 import vn.vvinh.be.dto.response.LoginResponse;
 import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.service.AuthenticationService;
 import vn.vvinh.be.service.EmailService;
 import vn.vvinh.be.utils.AccountUtils;
 
+import java.util.List;
 
 
 @SecurityRequirement(name = "api")
@@ -43,7 +41,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(newAccount);
     }
 
-    @GetMapping("profile/getProfile")
+    @GetMapping("profile/getCurrentProfile")
     public ResponseEntity getProfile(){
         return ResponseEntity.ok(accountUtils.getCurrentAccount());
     }
@@ -69,5 +67,9 @@ public class AuthenticationController {
 //        service.sendMailTemplate(registerRequestDTO);
 //        return  ResponseEntity.ok("success");
 //    }
+    @GetMapping("profile/getHost")
+    public  ResponseEntity<List<Account>> listHost(){
+        return  ResponseEntity.ok(authenticationService.getAllAccountHost());
 
+    }
 }
