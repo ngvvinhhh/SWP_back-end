@@ -28,10 +28,10 @@ public class Order implements Serializable {
     double total;
     Date date;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<ServiceHistory> serviceHistories;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<PackageHistory> packageHistories;
 
     @ManyToOne
@@ -47,7 +47,8 @@ public class Order implements Serializable {
     @JsonIgnore
     Rating rating;
 
-    @Column(nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "schedule_id", nullable = true)
     Schedule schedule;
 
     @Column

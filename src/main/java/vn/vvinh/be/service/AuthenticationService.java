@@ -151,4 +151,10 @@ public class AuthenticationService {
     public List<Account> getAllAccountHost() {
         return accountRepository.getAllAccountByRole(Role.HOST);
     }
+
+    public List<Account> getAllAccount() {
+        return accountRepository.findAll();
+    }
 }
+
+

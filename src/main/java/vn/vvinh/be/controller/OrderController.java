@@ -1,5 +1,6 @@
 package vn.vvinh.be.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,8 @@ import java.util.TreeMap;
 
 @RestController
 @RequestMapping("api/order")
+@SecurityRequirement(name = "api")
+@CrossOrigin("*")
 public class OrderController {
 
     @Autowired
@@ -64,7 +67,7 @@ public class OrderController {
         vnpParams.put("vnp_TxnRef", newOrder.getId() + "");
         vnpParams.put("vnp_OrderInfo", "Thanh toan cho ma GD: " + newOrder.getId() + "");
         vnpParams.put("vnp_OrderType", "other");
-        vnpParams.put("vnp_Amount", String.valueOf(4 * 1000000 * orderedDTO.getTotal()));
+        vnpParams.put("vnp_Amount", String.valueOf( 100 * (int) orderedDTO.getTotal()));
         vnpParams.put("vnp_ReturnUrl", returnUrl);
         vnpParams.put("vnp_CreateDate", formattedCreateDate);
         vnpParams.put("vnp_IpAddr", "http://birthdaykids.fun/");

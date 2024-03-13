@@ -16,11 +16,6 @@ public class OrderRequestDTO {
     List<Long> packageList;
     List<Long> serviceList;
     double total;
-    String time;
-//    List<ServiceHistory> serviceHistories;
-//    PackageHistory packageHistories;
-    Account account;
     long scheduleId;
     Date dateBook;
-    OrderStatus status;
 }

@@ -69,22 +69,30 @@ public class OrderService {
             packageHistory.setName(packagea.getName());
             packageHistory.setPrice(packagea.getPrice());
             packageHistory.setCategory(packagea.getCategory());
-
+            packageHistory.setOrder(order);
             packageHistories.add(packageHistory);
         }
 
         for(Long serviceId: orderRequestDTO.getServiceList()){
             vn.vvinh.be.entity.Service service = serviceRepository.findServiceById(serviceId);
-        ServiceHistory serviceHistory = new ServiceHistory();
-        serviceHistory.setPrice(service.getPrice());
-        serviceHistory.setPicture(service.getPicture());
-        serviceHistory.setQuantity(service.getQuantity());
-        serviceHistory.setServiceName(service.getServiceName());
-
+            if(service != null){
+                ServiceHistory serviceHistory = new ServiceHistory();
+                serviceHistory.setPrice(service.getPrice());
+                serviceHistory.setPicture(service.getPicture());
+                serviceHistory.setQuantity(service.getQuantity());
+                serviceHistory.setServiceName(service.getServiceName());
+                serviceHistory.setOrder(order);
+                serviceHistories.add(serviceHistory);
+            }
+            }
+            order.setPackageHistories(packageHistories);
+            order.setServiceHistories(serviceHistories);
+        try{
+            return orderRepository.save(order);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
-        order.setPackageHistories(packageHistories);
-        order.setServiceHistories(serviceHistories);
-        return order;
 
 
     }

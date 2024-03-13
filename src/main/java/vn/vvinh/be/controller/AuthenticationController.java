@@ -72,4 +72,10 @@ public class AuthenticationController {
         return  ResponseEntity.ok(authenticationService.getAllAccountHost());
 
     }
+
+    @GetMapping("profile/getAllAccount")
+    public  ResponseEntity<List<Account>> listAccount(){
+        return  ResponseEntity.ok(authenticationService.getAllAccount());
+
+    }
 }

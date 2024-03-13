@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,9 @@ public class Schedule implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "account_id")
     Account account;
+
+    @OneToMany(mappedBy = "schedule")
+            @JsonIgnore
+    List<Order> orders;
 
 }
