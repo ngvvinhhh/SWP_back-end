@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.vvinh.be.dto.OrderRequestDTO;
+import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.entity.Order;
 import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.entity.Schedule;
@@ -23,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -104,6 +106,11 @@ public class OrderController {
         Order ordered = orderRepository.findOrderById(orderId);
         ordered.setStatus(OrderStatus.PAID);
         return orderRepository.save(ordered);
+    }
+
+    @GetMapping("orders")
+    public ResponseEntity<List<Order>> getOrders() {
+        return  ResponseEntity.ok(orderService.getAllOrders());
     }
 
     private String generateHMAC(String secretKey, String signData) throws NoSuchAlgorithmException, InvalidKeyException {
