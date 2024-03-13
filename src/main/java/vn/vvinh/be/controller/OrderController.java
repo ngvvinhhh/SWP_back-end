@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.vvinh.be.dto.OrderRequestDTO;
-import vn.vvinh.be.entity.Account;
-import vn.vvinh.be.entity.Order;
+import vn.vvinh.be.entity.*;
 import vn.vvinh.be.entity.Package;
-import vn.vvinh.be.entity.Schedule;
 import vn.vvinh.be.enums.OrderStatus;
 import vn.vvinh.be.repository.OrderRepository;
 import vn.vvinh.be.repository.ScheduleRepository;
+import vn.vvinh.be.repository.WalletRepository;
 import vn.vvinh.be.service.OrderService;
 import vn.vvinh.be.utils.AccountUtils;
 
@@ -44,6 +43,8 @@ public class OrderController {
     private OrderRepository orderRepository;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private WalletRepository walletRepository;
 
     @PostMapping("/create-payment")
     public ResponseEntity createUrl(@RequestBody OrderRequestDTO orderedDTO) throws NoSuchAlgorithmException, InvalidKeyException, Exception {
@@ -105,7 +106,32 @@ public class OrderController {
     public Order orderSuccess(@RequestParam long orderId) {
         Order ordered = orderRepository.findOrderById(orderId);
         ordered.setStatus(OrderStatus.PAID);
+
+        //lay vi admin nap tien vao
+        //Wallet cua admin co id luon la 1
+        Wallet systemWallet = walletRepository.findById(Long.valueOf(1)).get();
+
+        //Trich tien ra
+        double tienTrich = ordered.getTotal() * 5 / 100;
+        //Nhet tien trich vo vi
+        systemWallet.setTotal(systemWallet.getTotal() + tienTrich);
+
+        //TIEN CON LAI CHO HOST
+        double conLai = ordered.getTotal() - tienTrich;
+        //lay vi host nap tien
+
+
         return orderRepository.save(ordered);
+    }
+
+    @GetMapping("accept")
+    public Order acceptOrders(@RequestParam long orderId){
+        return orderService.acceptOrders(orderId);
+    }
+
+    @GetMapping("refuse")
+    public Order refuseOrders(@RequestParam long orderId){
+        return orderService.refuseOrders(orderId);
     }
 
     @GetMapping("orders")

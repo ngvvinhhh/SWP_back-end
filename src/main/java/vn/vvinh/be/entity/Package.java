@@ -41,6 +41,8 @@ public class Package implements Serializable {
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
     List<Service> services;
+
+
 }
 
 

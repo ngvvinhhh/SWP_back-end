@@ -98,5 +98,15 @@ public class OrderService {
     }
 
 
+    public Order acceptOrders(long orderId) {
+        Order order = orderRepository.findOrderById(orderId);
+        order.setStatus(OrderStatus.ACCEPT);
+        return orderRepository.save(order);
+    }
 
+    public Order refuseOrders(long orderId) {
+        Order order = orderRepository.findOrderById(orderId);
+        order.setStatus(OrderStatus.REFUSE);
+        return orderRepository.save(order);
+    }
 }

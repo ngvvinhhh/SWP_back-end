@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import vn.vvinh.be.entity.*;
+import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.enums.OrderStatus;
 
 import java.time.LocalDate;
@@ -18,4 +19,5 @@ public class OrderRequestDTO {
     double total;
     long scheduleId;
     Date dateBook;
+    Package aPackage;
 }

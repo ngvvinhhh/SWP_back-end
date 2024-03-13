@@ -29,9 +29,11 @@ public class Order implements Serializable {
     Date date;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
     List<ServiceHistory> serviceHistories;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
     List<PackageHistory> packageHistories;
 
     @ManyToOne

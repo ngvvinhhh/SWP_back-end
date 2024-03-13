@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -21,6 +23,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "wallet_id")
     Wallet wallet;
+
+    @Column
+    Date createAt;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
