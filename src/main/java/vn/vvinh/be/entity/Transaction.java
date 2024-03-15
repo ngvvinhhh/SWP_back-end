@@ -18,14 +18,19 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String orderID;
-
-    @ManyToOne
-    @JoinColumn(name = "wallet_id")
-    Wallet wallet;
-
+    double money = 0;
     @Column
     Date createAt;
+
+    @ManyToOne
+    @JoinColumn(name = "from_id")
+    Wallet from;
+
+    @ManyToOne
+    @JoinColumn(name = "to_id")
+    Wallet to;
+
+
 
     @ManyToOne
     @JoinColumn(name = "order_id")

@@ -8,9 +8,8 @@ import vn.vvinh.be.dto.OrderRequestDTO;
 import vn.vvinh.be.entity.*;
 import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.enums.OrderStatus;
-import vn.vvinh.be.repository.OrderRepository;
-import vn.vvinh.be.repository.ScheduleRepository;
-import vn.vvinh.be.repository.WalletRepository;
+import vn.vvinh.be.enums.Role;
+import vn.vvinh.be.repository.*;
 import vn.vvinh.be.service.OrderService;
 import vn.vvinh.be.utils.AccountUtils;
 
@@ -45,6 +44,12 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private WalletRepository walletRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @PostMapping("/create-payment")
     public ResponseEntity createUrl(@RequestBody OrderRequestDTO orderedDTO) throws NoSuchAlgorithmException, InvalidKeyException, Exception {
@@ -105,20 +110,51 @@ public class OrderController {
     @GetMapping("/update-order")
     public Order orderSuccess(@RequestParam long orderId) {
         Order ordered = orderRepository.findOrderById(orderId);
+
+        if(ordered.getStatus() == OrderStatus.PAID) return ordered;
+
         ordered.setStatus(OrderStatus.PAID);
 
-        //lay vi admin nap tien vao
-        //Wallet cua admin co id luon la 1
-        Wallet systemWallet = walletRepository.findById(Long.valueOf(1)).get();
+        Account admin = accountRepository.findAccountByRole(Role.ADMIN);
+        Account customer = ordered.getAccount();
 
-        //Trich tien ra
-        double tienTrich = ordered.getTotal() * 5 / 100;
-        //Nhet tien trich vo vi
-        systemWallet.setTotal(systemWallet.getTotal() + tienTrich);
+        Wallet adminWallet = admin.getWallet();
+        Wallet customerWallet = customer.getWallet();
 
-        //TIEN CON LAI CHO HOST
-        double conLai = ordered.getTotal() - tienTrich;
-        //lay vi host nap tien
+        if(adminWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(admin);
+            admin.setWallet(wallet);
+            adminWallet = walletRepository.save(wallet);
+        }
+
+        if(customerWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(customer);
+            customer.setWallet(wallet);
+            customerWallet = walletRepository.save(wallet);
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setOrder(ordered);
+        transaction.setFrom(null);
+        transaction.setTo(customerWallet);
+        transaction.setCreateAt(new Date());
+        transaction.setMoney(ordered.getTotal());
+        transactionRepository.save(transaction);
+
+        Transaction transaction2 = new Transaction();
+        transaction2.setOrder(ordered);
+        transaction2.setFrom(customerWallet);
+        transaction2.setTo(adminWallet);
+        transaction2.setCreateAt(new Date());
+        transaction2.setMoney(ordered.getTotal());
+        transactionRepository.save(transaction2);
+
+
+        adminWallet.setTotal(adminWallet.getTotal() + ordered.getTotal());
 
 
         return orderRepository.save(ordered);

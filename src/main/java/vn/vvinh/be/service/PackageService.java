@@ -47,6 +47,7 @@ public class PackageService {
     public Package updatePackage(UpdatePackageDTO updatePackageDTO, long Id){
         Package aPackage = packageRepository.findPackageById(Id);
         aPackage.setCapacity(updatePackageDTO.getCapacity());
+        aPackage.setName(updatePackageDTO.getName());
         aPackage.setDescription(updatePackageDTO.getDescription());
         aPackage.setPicture(updatePackageDTO.getPicture());
         aPackage.setCategory(updatePackageDTO.getCategory());

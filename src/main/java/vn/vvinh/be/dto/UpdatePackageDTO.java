@@ -11,4 +11,5 @@ public class UpdatePackageDTO {
     String description;
     String picture;
     Category category;
+    String name;
 }

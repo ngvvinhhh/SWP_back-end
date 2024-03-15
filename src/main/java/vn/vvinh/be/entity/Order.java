@@ -40,6 +40,11 @@ public class Order implements Serializable {
     @JoinColumn(name = "account_id")
     Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    Account host;
+
+
     @OneToMany(mappedBy = "order")
     @JsonIgnore
     List<Transaction> transactionList;

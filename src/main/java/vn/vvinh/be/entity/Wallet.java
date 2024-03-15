@@ -1,5 +1,6 @@
 package vn.vvinh.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,16 @@ public class Wallet {
 
     double total;
 
-    @OneToMany(mappedBy = "wallet")
-    List<Transaction> transactions;
+    @OneToMany(mappedBy = "from")
+            @JsonIgnore
+    List<Transaction> payFor;
+
+    @OneToMany(mappedBy = "to")
+    @JsonIgnore
+    List<Transaction> receiveFrom;
+
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    Account account;
 
 }

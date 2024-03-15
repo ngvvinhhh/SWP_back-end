@@ -48,7 +48,7 @@ public class Account implements UserDetails {
     List<Schedule> schedules;
 
 
-    @OneToOne
+    @OneToOne(mappedBy = "account")
     @JsonIgnore
     @JoinColumn(name = "wallet_id")
     Wallet wallet;
@@ -64,6 +64,10 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     List<Service> services;
+
+    @OneToMany(mappedBy = "host")
+    @JsonIgnore
+    List<Order> order;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

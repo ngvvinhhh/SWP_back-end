@@ -6,10 +6,8 @@ import vn.vvinh.be.dto.OrderRequestDTO;
 import vn.vvinh.be.entity.*;
 import vn.vvinh.be.entity.Package;
 import vn.vvinh.be.enums.OrderStatus;
-import vn.vvinh.be.repository.OrderRepository;
-import vn.vvinh.be.repository.PackageRepository;
-import vn.vvinh.be.repository.ScheduleRepository;
-import vn.vvinh.be.repository.ServiceRepository;
+import vn.vvinh.be.enums.Role;
+import vn.vvinh.be.repository.*;
 import vn.vvinh.be.utils.AccountUtils;
 
 import java.math.BigDecimal;
@@ -29,6 +27,15 @@ public class OrderService {
     private ScheduleRepository scheduleRepository;
     @Autowired
     private ServiceRepository serviceRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    WalletRepository walletRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     // ServiceDTO methods for Order entity
 
@@ -59,6 +66,7 @@ public class OrderService {
         order.setSchedule(schedule);
         order.setDate(orderRequestDTO.getDateBook());
         order.setTotal(orderRequestDTO.getTotal());
+        order.setHost(schedule.getAccount());
 
         for(Long packageId: orderRequestDTO.getPackageList()){
             Package packagea = packageRepository.findPackageById(packageId);
@@ -93,20 +101,114 @@ public class OrderService {
             e.printStackTrace();
             return null;
         }
-
-
     }
 
 
     public Order acceptOrders(long orderId) {
         Order order = orderRepository.findOrderById(orderId);
         order.setStatus(OrderStatus.ACCEPT);
+
+        Account admin = accountRepository.findAccountByRole(Role.ADMIN);
+        Account customer = order.getAccount();
+        Account host = order.getHost();
+
+        Wallet adminWallet = admin.getWallet();
+        Wallet customerWallet = customer.getWallet();
+        Wallet hostWallet = host.getWallet();
+
+        if(adminWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(admin);
+            admin.setWallet(wallet);
+            adminWallet = walletRepository.save(wallet);
+        }
+
+        if(customerWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(customer);
+            customer.setWallet(wallet);
+            customerWallet = walletRepository.save(wallet);
+        }
+
+        if(hostWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(host);
+            host.setWallet(wallet);
+            hostWallet = walletRepository.save(wallet);
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setOrder(order);
+        transaction.setFrom(adminWallet);
+        transaction.setTo(customerWallet);
+        transaction.setCreateAt(new Date());
+        transaction.setMoney(order.getTotal() * 0.95);
+        transactionRepository.save(transaction);
+        hostWallet.setTotal(hostWallet.getTotal() + order.getTotal() * 0.95);
+        adminWallet.setTotal(adminWallet.getTotal() - order.getTotal());
         return orderRepository.save(order);
     }
 
     public Order refuseOrders(long orderId) {
         Order order = orderRepository.findOrderById(orderId);
         order.setStatus(OrderStatus.REFUSE);
+
+        Account admin = accountRepository.findAccountByRole(Role.ADMIN);
+        Account customer = order.getAccount();
+        Account host = order.getHost();
+
+        Wallet adminWallet = admin.getWallet();
+        Wallet customerWallet = customer.getWallet();
+        Wallet hostWallet = host.getWallet();
+
+        if(adminWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(admin);
+            admin.setWallet(wallet);
+            adminWallet = walletRepository.save(wallet);
+        }
+
+        if(customerWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(customer);
+            customer.setWallet(wallet);
+            customerWallet = walletRepository.save(wallet);
+        }
+
+        if(hostWallet == null){
+            Wallet wallet = new Wallet();
+            wallet.setTotal(0);
+            wallet.setAccount(host);
+            host.setWallet(wallet);
+            hostWallet = walletRepository.save(wallet);
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setOrder(order);
+        transaction.setFrom(adminWallet);
+        transaction.setTo(customerWallet);
+        transaction.setCreateAt(new Date());
+        transaction.setMoney(order.getTotal() * 0.7);
+        transactionRepository.save(transaction);
+
+        Transaction transaction2 = new Transaction();
+        transaction2.setOrder(order);
+        transaction2.setFrom(adminWallet);
+        transaction2.setTo(hostWallet);
+        transaction2.setCreateAt(new Date());
+        transaction2.setMoney(order.getTotal() * 0.3);
+        transactionRepository.save(transaction2);
+
+
+        customerWallet.setTotal(customerWallet.getTotal() + order.getTotal() * 0.7);
+        hostWallet.setTotal(hostWallet.getTotal() + order.getTotal() * 0.3);
+        adminWallet.setTotal(adminWallet.getTotal() - order.getTotal());
+
         return orderRepository.save(order);
     }
 }
