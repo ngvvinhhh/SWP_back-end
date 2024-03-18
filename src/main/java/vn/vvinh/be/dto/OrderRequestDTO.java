@@ -20,4 +20,5 @@ public class OrderRequestDTO {
     long scheduleId;
     Date dateBook;
     Package aPackage;
+    OrderStatus status;
 }

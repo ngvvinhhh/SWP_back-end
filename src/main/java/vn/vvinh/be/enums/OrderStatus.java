@@ -6,7 +6,9 @@ public enum OrderStatus {
 
     ACCEPT,
 
-    REFUSE
+    REFUSE,
+
+    FINISH
 
 
 }

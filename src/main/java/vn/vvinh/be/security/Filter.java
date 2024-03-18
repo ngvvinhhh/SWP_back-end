@@ -36,7 +36,7 @@ public class Filter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (uri.contains("/login") || uri.contains("/register") || uri.contains("swagger-ui") || uri.contains("v3") || uri.contains("/verify")) {
+        if (uri.contains("/login") || uri.contains("/register") || uri.contains("swagger-ui") || uri.contains("v3") || uri.contains("/verify") || uri.contains("/dashboard/admin")) {
             filterChain.doFilter(request, response);
             return;
         }
