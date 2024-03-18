@@ -8,6 +8,7 @@ import vn.vvinh.be.entity.Order;
 import vn.vvinh.be.enums.OrderStatus;
 import vn.vvinh.be.repository.AccountRepository;
 import vn.vvinh.be.repository.OrderRepository;
+import vn.vvinh.be.utils.AccountUtils;
 
 import java.math.BigDecimal;
 import java.text.ParsePosition;
@@ -25,6 +26,8 @@ public class HostDashboardService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private AccountUtils currentAccount;
 
     //Lay ngay dau cua moi thang
     public List<Date> returnStartDateList(){
@@ -62,7 +65,7 @@ public class HostDashboardService {
 
 
 
-    public HostDashboardDTO getDetail(long id) {
+    public HostDashboardDTO getDetail() {
         //AdminDashboardDTO adminDashboardDTO;
         //Lay danh sach ngay dau va ngay cuoi cua moi thang
         List<Date> startDate = returnStartDateList();
@@ -75,7 +78,7 @@ public class HostDashboardService {
 
         //Lay so luong order theo thang
         for (int i = 0; i < 11; i++) {
-            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
+            List<Order> orders = orderRepository.findOrderByHostAndCreateAtBetweenAndStatus(currentAccount.getCurrentAccount(),startDate.get(i), endDate.get(i), OrderStatus.PAID);
             monthlyOrder.add(orders.size());
         }
 
@@ -84,7 +87,7 @@ public class HostDashboardService {
         List<Double> monthlyRevenue = new ArrayList<>();
         double totalRevenue = 0;
         for (int i = 0; i < 11; i++) {
-            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
+            List<Order> orders = orderRepository.findOrderByHostAndCreateAtBetweenAndStatus(currentAccount.getCurrentAccount(), startDate.get(i), endDate.get(i), OrderStatus.PAID);
             double total = 0;
             for (int j = 0; j < orders.size(); j++) {
                 total += orders.get(j).getTotal();

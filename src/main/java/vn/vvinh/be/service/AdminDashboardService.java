@@ -74,6 +74,7 @@ public class AdminDashboardService {
 
         //Lay so luong order theo thang
         for (int i = 0; i < 11; i++) {
+
             List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
             monthlyOrder.add(orders.size());
         }

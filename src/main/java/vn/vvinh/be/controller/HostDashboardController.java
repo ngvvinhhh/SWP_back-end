@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vn.vvinh.be.dto.AdminDashboardDTO;
+import vn.vvinh.be.dto.HostDashboardDTO;
 import vn.vvinh.be.service.AdminDashboardService;
+import vn.vvinh.be.service.HostDashboardService;
 
 @RestController
 @SecurityRequirement(name = "api")
@@ -13,11 +15,11 @@ import vn.vvinh.be.service.AdminDashboardService;
 public class HostDashboardController {
 
     @Autowired
-    private AdminDashboardService adminDashboardService;
+    private HostDashboardService hostDashboardService;
 
-    @GetMapping("/detail{id}")
-    public AdminDashboardDTO getChartDetail(@PathVariable long id){
-        AdminDashboardDTO adminDashboardDTO = adminDashboardService.getDetail();
-        return adminDashboardDTO;
+    @GetMapping("/detail")
+    public HostDashboardDTO getChartDetail(){
+        HostDashboardDTO hostDashboardDTO = hostDashboardService.getDetail();
+        return hostDashboardDTO;
 }
 }
