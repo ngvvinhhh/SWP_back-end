@@ -160,12 +160,12 @@ public class OrderController {
         return orderRepository.save(ordered);
     }
 
-    @GetMapping("accept")
+    @PatchMapping("accept")
     public Order acceptOrders(@RequestParam long orderId){
         return orderService.acceptOrders(orderId);
     }
 
-    @GetMapping("refuse")
+    @PatchMapping("refuse")
     public Order refuseOrders(@RequestParam long orderId){
         return orderService.refuseOrders(orderId);
     }
