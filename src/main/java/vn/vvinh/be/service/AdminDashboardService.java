@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.vvinh.be.dto.AdminDashboardDTO;
 import vn.vvinh.be.dto.OrderRequestDTO;
+import vn.vvinh.be.entity.Account;
 import vn.vvinh.be.entity.Order;
 import vn.vvinh.be.enums.OrderStatus;
+import vn.vvinh.be.enums.Role;
 import vn.vvinh.be.repository.AccountRepository;
 import vn.vvinh.be.repository.OrderRepository;
 
@@ -36,7 +38,7 @@ public class AdminDashboardService {
                 "2024-09-01", "2024-10-01",
                 "2024-11-01", "2024-12-01");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             Date startDate = format.parse(startString.get(i), new ParsePosition(0));
             StartList.add(startDate);
         }
@@ -53,7 +55,7 @@ public class AdminDashboardService {
                 "2024-09-30", "2024-10-31",
                 "2024-11-30", "2024-12-31" );
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             Date startDate = format.parse(endString.get(i), new ParsePosition(0));
             endList.add(startDate);
         }
@@ -69,21 +71,33 @@ public class AdminDashboardService {
         List<Date> endDate = returnEndDateList();
         BigDecimal systemTotalRevenue = new BigDecimal(0);
 
+        int totalOrders = 0;
+
         //TAo list de dua vao constructor
         List<Integer> monthlyOrder = new ArrayList<>();
 
         //Lay so luong order theo thang
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
 
             List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
             monthlyOrder.add(orders.size());
+            int ordersCount = orders.size();
+            totalOrders += ordersCount;
         }
 
+        int totalHost = 0;
+        List<Account> hosts = accountRepository.getAllAccountByRole(Role.HOST);
+        totalHost = hosts.size();
+
+        int totalGuest = 0;
+        List<Account> guests = accountRepository.getAllAccountByRole(Role.CUSTOMER);
+        totalGuest = guests.size();
         //Lay so luong revenue theo thang
+
 
         List<Double> monthlyRevenue = new ArrayList<>();
         double totalRevenue = 0;
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
             double total = 0;
             for (int j = 0; j < orders.size(); j++) {
@@ -94,6 +108,6 @@ public class AdminDashboardService {
         }
 
         //Layas dc revenue tung thang => lay dc tong revenue cua 12 thang
-        return new AdminDashboardDTO(totalRevenue, monthlyOrder, monthlyRevenue);
+        return new AdminDashboardDTO(totalRevenue, monthlyOrder, monthlyRevenue, totalOrders, totalHost, totalGuest);
     }
 }
