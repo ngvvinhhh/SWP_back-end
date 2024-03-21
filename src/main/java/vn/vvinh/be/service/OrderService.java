@@ -143,12 +143,14 @@ public class OrderService {
         Transaction transaction = new Transaction();
         transaction.setOrder(order);
         transaction.setFrom(adminWallet);
-        transaction.setTo(customerWallet);
+        transaction.setTo(hostWallet);
         transaction.setCreateAt(new Date());
         transaction.setMoney(order.getTotal() * 0.95);
         transactionRepository.save(transaction);
         hostWallet.setTotal(hostWallet.getTotal() + order.getTotal() * 0.95);
         adminWallet.setTotal(adminWallet.getTotal() - order.getTotal());
+
+
         return orderRepository.save(order);
     }
 
@@ -193,7 +195,7 @@ public class OrderService {
         transaction.setFrom(adminWallet);
         transaction.setTo(customerWallet);
         transaction.setCreateAt(new Date());
-        transaction.setMoney(order.getTotal() * 0.7);
+        transaction.setMoney(order.getTotal() * 0.85);
         transactionRepository.save(transaction);
 
         Transaction transaction2 = new Transaction();
@@ -201,12 +203,12 @@ public class OrderService {
         transaction2.setFrom(adminWallet);
         transaction2.setTo(hostWallet);
         transaction2.setCreateAt(new Date());
-        transaction2.setMoney(order.getTotal() * 0.3);
+        transaction2.setMoney(order.getTotal() * 0.15);
         transactionRepository.save(transaction2);
 
 
-        customerWallet.setTotal(customerWallet.getTotal() + order.getTotal() * 0.7);
-        hostWallet.setTotal(hostWallet.getTotal() + order.getTotal() * 0.3);
+        customerWallet.setTotal(customerWallet.getTotal() + order.getTotal() * 0.85);
+        hostWallet.setTotal(hostWallet.getTotal() + order.getTotal() * 0.15);
         adminWallet.setTotal(adminWallet.getTotal() - order.getTotal());
 
         return orderRepository.save(order);
