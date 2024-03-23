@@ -87,7 +87,7 @@ public class AuthenticationService {
 
         }
 
-        if (loginAccount.isVerify()) {
+        if (loginAccount.isVerify() && !loginAccount.isDeleted()) {
             LoginResponse loginResponse = new LoginResponse();
             loginResponse.setId(loginAccount.getId());
             loginResponse.setFullname(loginAccount.getFullName());
@@ -98,9 +98,10 @@ public class AuthenticationService {
 
             return loginResponse;
         }else {
-            throw new AccountNotFound("Please confirm your email!");
+            throw new AccountNotFound("Account does not exist or the email has not been comfirmed!!");
         }
         //return  null;
+
     }
 
 

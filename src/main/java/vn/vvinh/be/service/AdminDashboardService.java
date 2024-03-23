@@ -86,11 +86,11 @@ public class AdminDashboardService {
         }
 
         int totalHost = 0;
-        List<Account> hosts = accountRepository.getAllAccountByRole(Role.HOST);
+        List<Account> hosts = accountRepository.getAllNotIsDeletedAccountsByRole(Role.HOST, false);
         totalHost = hosts.size();
 
         int totalGuest = 0;
-        List<Account> guests = accountRepository.getAllAccountByRole(Role.CUSTOMER);
+        List<Account> guests = accountRepository.getAllNotIsDeletedAccountsByRole(Role.CUSTOMER, false);
         totalGuest = guests.size();
         //Lay so luong revenue theo thang
 

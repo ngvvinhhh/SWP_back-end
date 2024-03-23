@@ -89,7 +89,7 @@ public class HostDashboardService {
         }
 
         int totalGuest = 0;
-        List<Account> guests = accountRepository.getAllAccountByRole(Role.CUSTOMER);
+        List<Account> guests = accountRepository.getAllNotIsDeletedAccountsByRole(Role.CUSTOMER, false);
         totalGuest = guests.size();
 
         //Lay so luong revenue theo thang

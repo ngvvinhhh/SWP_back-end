@@ -20,7 +20,6 @@ import java.util.List;
 public class Service implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     long id;
     @Column(columnDefinition = "nvarchar(255)")
     String serviceName;
