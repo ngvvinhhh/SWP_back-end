@@ -34,7 +34,6 @@ public class TokenHandler {
         String username;
         Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
         username = claims.getSubject();
-        // xuống đc đây => token đúng
         return username;
     }
 
@@ -43,7 +42,6 @@ public class TokenHandler {
         try {
             Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
             date = claims.getExpiration();
-            // xuống đc đây => token đúng
         } catch (ExpiredJwtException expiredJwtException) {
             expiredJwtException.printStackTrace();
         }

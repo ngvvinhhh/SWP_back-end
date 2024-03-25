@@ -62,11 +62,6 @@ public class AuthenticationController {
         return ResponseEntity.ok("Confirm email success!");
     }
 
-//    @GetMapping("/testSendMail")
-//    public ResponseEntity testSendMail(){
-//        service.sendMailTemplate(registerRequestDTO);
-//        return  ResponseEntity.ok("success");
-//    }
     @GetMapping("profile/getHost")
     public  ResponseEntity<List<Account>> listHost(){
         return  ResponseEntity.ok(authenticationService.getAllAccountHost());
