@@ -20,5 +20,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findOrderByHostAndDateBetweenAndStatus(Account account, Date startDate, Date endDate, OrderStatus orderStatus);
     List<Order> findAll();
 
-    List<Order> findOrdersByCreateAtBetweenAndStatus(Date startDate, Date endDate, OrderStatus orderStatus);
+    List<Order> findOrdersByDateBetweenAndStatus(Date startDate, Date endDate, OrderStatus orderStatus);
 }

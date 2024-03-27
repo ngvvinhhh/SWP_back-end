@@ -77,7 +77,7 @@ public class AdminDashboardService {
         //Lay so luong order theo thang
         for (int i = 0; i <= 11; i++) {
 
-            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.ACCEPT);
+            List<Order> orders = orderRepository.findOrdersByDateBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.ACCEPT);
             monthlyOrder.add(orders.size());
             int ordersCount = orders.size();
             totalOrders += ordersCount;
@@ -96,7 +96,7 @@ public class AdminDashboardService {
         List<Double> monthlyRevenue = new ArrayList<>();
         double totalRevenue = 0;
         for (int i = 0; i <= 11; i++) {
-            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.ACCEPT);
+            List<Order> orders = orderRepository.findOrdersByDateBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.ACCEPT);
             double total = 0;
             for (int j = 0; j < orders.size(); j++) {
                 total += orders.get(j).getTotal();
