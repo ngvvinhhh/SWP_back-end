@@ -96,7 +96,7 @@ public class AdminDashboardService {
         List<Double> monthlyRevenue = new ArrayList<>();
         double totalRevenue = 0;
         for (int i = 0; i <= 11; i++) {
-            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.PAID);
+            List<Order> orders = orderRepository.findOrdersByCreateAtBetweenAndStatus(startDate.get(i), endDate.get(i), OrderStatus.ACCEPT);
             double total = 0;
             for (int j = 0; j < orders.size(); j++) {
                 total += orders.get(j).getTotal();
